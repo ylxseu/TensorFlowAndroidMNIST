@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 	private static final int PIXEL_WIDTH = 28;
 
 	private TextView mResultText;
+	private TextView mResultText_ylx;
 
 	private float mLastX;
 	private float mLastY;
@@ -39,7 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
 	private PointF mTmpPiont = new PointF();
 
-	private DigitDetector mDetector = new DigitDetector();
+	private DigitDetector mDetector = new DigitDetector(0);
+	private DigitDetector mDetector2 = new DigitDetector(1);
 
 
 	@SuppressWarnings("SuspiciousNameCombination")
@@ -54,6 +56,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 			return;
 		}
 
+		boolean ret2 = mDetector2.setup(this);
+		if( !ret2 ) {
+			Log.i(TAG, "Detector setup failed");
+			return;
+		}
 		mModel = new DrawModel(PIXEL_WIDTH, PIXEL_WIDTH);
 
 		mDrawView = (DrawView) findViewById(R.id.view_draw);
@@ -77,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 		});
 
 		mResultText = (TextView)findViewById(R.id.text_result);
+		mResultText_ylx = (TextView) findViewById(R.id.text_result_ylx);
 	}
 
 	@Override
@@ -140,10 +148,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 	private void onDetectClicked() {
 		int pixels[] = mDrawView.getPixelData();
 		int digit = mDetector.detectDigit(pixels);
+		int digit2 = mDetector2.detectDigit(pixels);
 
 		Log.i(TAG, "digit =" + digit);
 
-		mResultText.setText("Detected = " + digit);
+		mResultText.setText("Detected_CNN = " + digit);
+		mResultText_ylx.setText("Detected_ylx = " + digit);
 	}
 
 	private void onClearClicked() {
@@ -152,5 +162,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 		mDrawView.invalidate();
 
 		mResultText.setText("");
+		mResultText_ylx.setText("");
 	}
 }

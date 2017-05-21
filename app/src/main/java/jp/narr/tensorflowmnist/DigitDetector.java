@@ -29,6 +29,12 @@ public class DigitDetector {
 		System.loadLibrary("tensorflow_mnist");
 	}
 
+	private int mFlag;
+
+	public DigitDetector(int flag) {
+		mFlag = flag;
+	}
+
 	private native int init(AssetManager assetManager, String model);
 
 	/**
@@ -39,11 +45,16 @@ public class DigitDetector {
 	public boolean setup(Context context) {
 		AssetManager assetManager = context.getAssets();
 
+		int ret;
 		// model from beginner tutorial
 		//int ret = init(assetManager, "file:///android_asset/beginner-graph.pb");
 
 		// model from expert tutorial
-		int ret = init(assetManager, "file:///android_asset/expert-graph.pb");
+		if (mFlag == 0) {
+			ret = init(assetManager, "file:///android_asset/expert-graph.pb");
+		} else {
+			ret = init(assetManager, "file:///android_asset/ylx.pb");
+		}
 
 		return ret >= 0;
 	}
