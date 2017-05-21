@@ -51,7 +51,7 @@
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:textAppearance="?android:attr/textAppearanceMedium"
-			android:hint="CNN_results"
+			android:hint="YLX_results"
 			android:textColor="@color/colorAccent"
 			android:text=""
 			android:id="@+id/text_result_ylx"/>
