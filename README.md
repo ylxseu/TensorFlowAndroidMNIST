@@ -2,7 +2,11 @@
 
 This is a demo app for Android with Tensorflow to detect handwritten digits.
 
+Original branch:
 ![image](http://narr.jp/private/miyoshi/tensorflow/mnist_screen0.png)
+
+YLX_Modified branch:
+![image](http://images.cnblogs.com/cnblogs_com/Leon-Yan/1005419/o_SEU2.jpg)
 
 This Android demo is based on Tensorflow tutorial.
 
